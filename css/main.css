@@ -2597,3 +2597,7 @@ footer .copyright span:last-child::after {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+.media img{
+	background: url("../images/bg-portfolio.jpg") center no-repeat;
+}
