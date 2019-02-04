@@ -1,0 +1,13 @@
+{
+    "name": "profile/profile",
+    "authors": [
+        {
+            "name": "Sadman Sarar",
+            "email": "sadmansarar@gmail.com"
+        }
+    ],
+    "require": {
+        "sendgrid/sendgrid": "~7",
+        "vlucas/phpdotenv": "^3.3"
+    }
+}

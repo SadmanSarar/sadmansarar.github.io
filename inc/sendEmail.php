@@ -1,9 +1,10 @@
 ﻿<?php
-
+require '../vendor/autoload.php';
 // Replace this with your own email address
-$siteOwnersEmail = 'user@website.com';
+$siteOwnersEmail = 'me@sadmansarar.xyz';
 
-
+$dotenv = Dotenv\Dotenv::create(__DIR__);
+$dotenv->load();
 if ($_POST) {
 
     $name = trim(stripslashes($_POST['contactName']));
@@ -36,7 +37,6 @@ if ($_POST) {
     $message .= "Message: <br />";
     $message .= $contact_message;
     $message .= "<br /> ----- <br /> This email was sent from your site's contact form. <br />";
-
     // Set From: header
     $from = $name . " <" . $email . ">";
 
@@ -46,16 +46,24 @@ if ($_POST) {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-
     if (!$error) {
+        $fromEmail = $email;
+        $email = new \SendGrid\Mail\Mail();
+        $email->setFrom($fromEmail);
+        $email->setSubject("".$name." - Message From sadmansarar.xyz");
+        $email->addContent(
+            "text/html", $message
+        );
 
-        ini_set("sendmail_from", $siteOwnersEmail); // for windows server
-        $mail = mail($siteOwnersEmail, $subject, $message, $headers);
-
-        if ($mail) {
-            echo "OK";
-        } else {
-            echo "Something went wrong. Please try again.";
+        $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+        try {
+            $response = $sendgrid->send($email);
+            print $response->statusCode() . "\n";
+            print_r($response->headers());
+            print $response->body() . "\n";
+        } catch (Exception $e) {
+            echo 'Caught exception: '. $e->getMessage() ."\n";
+            var_dump($e);
         }
 
     } # end if - no validation error

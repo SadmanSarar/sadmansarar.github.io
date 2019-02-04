@@ -1,0 +1,4 @@
+/vendor/
+sendgrid.env
+.idea/
+/inc/.env
