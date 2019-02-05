@@ -8,6 +8,7 @@
     ],
     "require": {
         "sendgrid/sendgrid": "~7",
-        "vlucas/phpdotenv": "^3.3"
+        "vlucas/phpdotenv": "^3.3",
+        "mailjet/mailjet-apiv3-php": "^1.4"
     }
 }

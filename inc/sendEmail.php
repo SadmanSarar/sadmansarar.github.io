@@ -1,4 +1,7 @@
 ﻿<?php
+
+use Mailjet\Resources;
+
 require '../vendor/autoload.php';
 // Replace this with your own email address
 $siteOwnersEmail = 'me@sadmansarar.xyz';
@@ -48,23 +51,30 @@ if ($_POST) {
 
     if (!$error) {
         $fromEmail = $email;
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom($fromEmail);
-        $email->setSubject("".$name." - Message From sadmansarar.xyz");
-        $email->addContent(
-            "text/html", $message
-        );
 
-        $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-        try {
-            $response = $sendgrid->send($email);
-            print $response->statusCode() . "\n";
-            print_r($response->headers());
-            print $response->body() . "\n";
-        } catch (Exception $e) {
-            echo 'Caught exception: '. $e->getMessage() ."\n";
-            var_dump($e);
-        }
+        $mj = new \Mailjet\Client(getenv('MJ_APIKEY_PUBLIC'), getenv('MJ_APIKEY_PRIVATE'),true,['version' => 'v3.1']);
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => "sadmansarar@gmail.com",
+                        'Name' => $name
+                    ],
+                    'To' => [
+                        [
+                            'Email' => "sadman.singularity@gmail.com",
+                            'Name' => "Sadman Sarar"
+                        ]
+                    ],
+                    'Subject' => $subject,
+                    'HTMLPart' => $message
+                ]
+            ]
+        ];
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
+        $response->success();
+        echo "OK";
+
 
     } # end if - no validation error
 
