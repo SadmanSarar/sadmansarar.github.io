@@ -154,7 +154,7 @@ p img {
 }
 p.lead {
 	font-family: "lora-regular", serif;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	line-height: 1.8;
 	color: #888888;
 }
@@ -957,7 +957,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	top: -3rem;
 	font-family: "poppins-bold", sans-serif;
 	color: #313131;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	letter-spacing: .2rem;
 	font-size: 1.5rem;
 	line-height: 2.4rem;
@@ -1504,15 +1504,15 @@ header .logo a {
 	margin-left: -30px;
 }
 .intro-info img {
-	height: 9rem;
-	width: 9rem;
-	border-radius: 50%;
+	height: 24rem;
+	width: 16rem;
+	border-radius: 8px;
 	margin: .9rem 0 0 0;
 	float: left;
 }
 .intro-info .lead {
 	text-align: left;
-	padding-left: 13rem;
+	padding-left: 20rem;
 }
 
 .about-content {
@@ -1577,7 +1577,7 @@ header .logo a {
 }
 @media only screen and (max-width:768px) {
 	.intro-info img {
-		height: 7.8rem;
+		height: 12.8rem;
 		width: 7.8rem;
 	}
 	.intro-info .lead {
@@ -1603,7 +1603,7 @@ header .logo a {
 		margin-top: 3rem;
 	}
 	.intro-info img {
-		height: 6.6rem;
+		height: 10rem;
 		width: 6.6rem;
 		float: none;
 		display: inline-block;
